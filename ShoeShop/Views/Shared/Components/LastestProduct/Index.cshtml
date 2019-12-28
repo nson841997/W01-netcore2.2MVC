@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+@using ShoeShop.Models;
+@foreach (var product in Model)
+{
+    Product productInfo = ((Product)product);
+    Photo photo = productInfo.Photos.SingleOrDefault(ph => ph.Status && ph.Featured);
+    var photoName = photo == null ? "no-image.jpg" : photo.Name;
+    <div class="thumbnail">
+        <img src="~/product/@photoName" alt="Bootshop panasonoc New camera" />
+        <div class="caption">
+            <h5>@productInfo.Name</h5>
+            <h4 style="text-align:center">
+                <a class="btn" asp-action="details" asp-route-id="@product.Id" asp-controller="product"><i class="icon-zoom-in"></i></a>
+                <a class="btn" asp-action="buy" asp-route-id="@product.Id" asp-controller="cart">Add to <i class="icon-shopping-cart"></i></a>
+                <a class="btn btn-primary" href="#">@productInfo.Price</a>
+            </h4>
+        </div>
+    </div>
+}
+
+

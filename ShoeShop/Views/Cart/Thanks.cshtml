@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using ShoeShop.Models
+
+<div class="span9">
+    <ul class="breadcrumb">
+        <li><a asp-controller="home">Home</a> <span class="divider">/</span></li>
+        <li class="active"> Thanks</li>
+    </ul>
+    <h3>Thanks for buying.</h3>
+
+    <a asp-controller="home" asp-action="index" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+</div>
+

@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@model ShoeShop.Models.Account
+<div class="span9">
+    <ul class="breadcrumb">
+        <li><a asp-action="index" asp-controller="home">Home</a> <span class="divider">/</span></li>
+        <li class="active">Profile</li>
+    </ul>
+    <h3> Profile</h3>
+    <div class="well">
+        <form class="form-horizontal" asp-controller="customer" asp-action="profile" method="post">
+            <div class="control-group">
+                <label class="control-label" for="username">Username <sup>*</sup></label>
+                <div class="controls">
+                    <input type="text" id="username" placeholder="Username" required asp-for="Username" readonly>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="Password">Password <sup>*</sup></label>
+                <div class="controls">
+                    <input type="password" id="password" placeholder="Password" required asp-for="Password">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="fullName">Full Name</label>
+                <div class="controls">
+                    <input type="text" id="fullName" placeholder="Full Name" required asp-for="Fullname">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="email">Email<sup>*</sup></label>
+                <div class="controls">
+                    <input type="email" id="email" placeholder="Email" required asp-for="Email">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="address">Address</label>
+                <div class="controls">
+                    <input type="text" id="address" placeholder="Address" required asp-for="Address">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="phone">Phone</label>
+                <div class="controls">
+                    <input type="number" id="phone" placeholder="Phone" required asp-for="Phone">
+                </div>
+            </div>
+            <p><sup>*</sup>Required field	</p>
+
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-large btn-success" type="submit" value="Save">
+                    <input type="hidden" asp-for="Id" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+

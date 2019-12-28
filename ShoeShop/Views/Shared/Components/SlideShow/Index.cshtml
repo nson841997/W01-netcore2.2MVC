@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="carouselBlk">
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            @{ var index = 0; }
+            @foreach (var slideshow in Model)
+            {
+                <div class="item @(index == 0 ? "active" : "")">
+                    <div class="container">
+                        <a href="#"><img style="width:100%" src="~/slideshows/@slideshow.Name" alt="special offers"></a>
+                        <div class="carousel-caption">
+                            <h4>@slideshow.Title</h4>
+                            <p>@slideshow.Description</p>
+                        </div>
+                    </div>
+                </div>
+                index++;
+            }
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+    </div>
+</div>

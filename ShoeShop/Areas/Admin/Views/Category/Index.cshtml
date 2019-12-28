@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Category List
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+    </ol>
+</section>
+<section class="content">
+    @if (TempData["error"] != null)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger alert-dismissible">
+                    <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                    Deleted Failed!!
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Hover Data Table</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="categoryList" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Parent</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var category in ViewBag.categories)
+                            {
+                                <tr>
+                                    <td>@category.Id</td>
+                                    <td>
+                                        <b>@category.Name</b>
+                                    </td>
+                                    <td>@(category?.Status ? "Show" : "Hide")</td>
+                                    <td>@(category.Parent == null ? "" : category.Parent.Name)</td>
+                                    <td>
+                                        <a asp-area="admin" asp-action="edit" asp-controller="category" asp-route-id="@category.Id">Edit</a><span> | </span>
+                                        @if (category.InverseParent != null && category.InverseParent.Count == 0)
+                                        {
+                                            <a asp-area="admin" asp-action="delete" asp-controller="category" asp-route-id="@category.Id" onclick="return confirm('Are you sure?')">Delete</a><span> | </span>
+                                        }
+                                        <a asp-area="admin" asp-action="addsub" asp-controller="category" asp-route-id="@category.Id">Add Sub Category</a>
+                                    </td>
+                                </tr>
+                                if (category.InverseParent != null && category.InverseParent.Count != 0)
+                                {
+                                    foreach (var subCategory in category.InverseParent)
+                                    {
+                                        <tr>
+                                            <td>@subCategory.Id</td>
+                                            <td>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@subCategory.Name
+                                            </td>
+                                            <td>@(subCategory.Status ? "Show" : "Hide")</td>
+                                            <td>@subCategory.Parent.Name</td>
+                                            <td>
+                                                <a asp-area="admin" asp-action="edit" asp-controller="category" asp-route-id="@subCategory.Id">Edit</a><span> | </span>
+                                                <a asp-area="admin" asp-action="delete" asp-controller="category" asp-route-id="@subCategory.Id" onclick="return confirm('Are you sure?')">Delete</a><span> | </span>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Parent</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#categoryList').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        });
+    });
+</script>

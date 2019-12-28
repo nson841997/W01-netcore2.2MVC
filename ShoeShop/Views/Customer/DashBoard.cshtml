@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Dasboard";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@model ShoeShop.Models.Account
+<div class="span9">
+    <ul class="breadcrumb">
+        <li><a asp-action="index" asp-controller="home">Home</a> <span class="divider">/</span></li>
+        <li class="active">Dashboard</li>
+    </ul>
+    <h3>Customer Dashboard</h3>
+    <div class="well">
+        <h4>
+            <a asp-controller="customer" asp-action="profile">Change Profile</a>
+        </h4>
+        <hr class="soft">
+        <h4>
+            <a asp-controller="customer" asp-action="history">Invoices Management</a>
+        </h4>
+        <hr class="soft">
+        <h4>
+            <a asp-controller="customer" asp-action="signout">Logout</a>
+        </h4>
+        <hr class="soft">
+    </div>
+
+</div>
+
